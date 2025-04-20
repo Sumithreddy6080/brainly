@@ -2,20 +2,16 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-const Mongo_URI =
-    process.env.MONGO_URI || "mongodb+srv://sumithreddy:sumith123@branly.o8apy.mongodb.net/?retryWrites=true&w=majority&appName=Branly";
-
-    console.log(Mongo_URI);
-
+const MONGO_URI = process.env.MONGO_URI || "";
+// console.log(Mongo_URI);
 const DB_Connect = async () => {
-    await mongoose
-        .connect(Mongo_URI)
-        .then(() => {
-            console.log("Connected to the database");
-        })
-        .catch((err) => {
-            console.log("Error connecting to the database", err);
-        });
+  try {
+    await mongoose.connect(MONGO_URI);
+    console.log("MongoDB connected successfully ....");
+  }catch (error : any) {
+    console.error("Error connecting to MongoDB:", error.message);
+  }
+
 };
 
 export default DB_Connect;
